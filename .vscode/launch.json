@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Debug ANTLR4 grammar",
+            "type": "antlr-debug",
+            "request": "launch",
+            "input": "./examples/proto-build.pegilang",
+            "grammar": "./PegiParser.g4",
+            "actionFile": "",
+            "startRule": "sourceFile",
+            "printParseTree": true,
+            "visualParseTree": true
+        }
+    ]
+}

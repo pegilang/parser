@@ -1,0 +1,15 @@
+{
+    "antlr4.atn.saveDir": "./examples/svg",
+    "antlr4.call-graph.saveDir": "./examples/call-graph",
+    "antlr4.referencesCodeLens.enabled": true,
+    "antlr4.rrd.saveDir": "./examples/railroad",
+    "antlr4.generation": {
+        "mode": "internal",
+        "language": "Go",
+        "listeners": true,
+        "visitors": true,
+        "outputDir": "./Go",
+        "importDir": "./"
+    },
+
+}

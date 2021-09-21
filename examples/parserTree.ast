@@ -1,0 +1,1120 @@
+
+sourceFile (
+ parserClause (
+  "parser"
+  string_ (
+   ""github.com/pegilang/scheme/v1""
+  )
+ )
+ eos importDecl (
+  "import"
+  "("
+  importSpec (
+   importPath (
+    string_ (
+     ""github.com/pegilang/core""
+    )
+   )
+  )
+  eos  importSpec (
+   importPath (
+    string_ (
+     ""github.com/pegipkg/git-subscribe""
+    )
+   )
+  )
+  eos  importSpec (
+   importPath (
+    string_ (
+     ""github.com/pegipkg/git-pull""
+    )
+   )
+  )
+  eos  importSpec (
+   importPath (
+    string_ (
+     ""github.com/pegipkg/linux-tool""
+    )
+   )
+  )
+  eos  importSpec (
+   importPath (
+    string_ (
+     ""github.com/pegipkg/git-push""
+    )
+   )
+  )
+  eos  importSpec (
+   importPath (
+    string_ (
+     ""github.com/pegipkg/regexp""
+    )
+   )
+  )
+  eos  ")"
+ )
+ eos statementList (
+  statement (
+   interfaceType (
+    "interface"
+    "PipelineProps"
+    "{"
+    fieldDecl (
+     "from"
+     typeT (
+      typeName (
+       "core"
+       "."
+       "url"
+      )
+     )
+    )
+    eos    fieldDecl (
+     "to"
+     typeT (
+      typeName (
+       "core"
+       "."
+       "url"
+      )
+     )
+    )
+    eos    fieldDecl (
+     "lang"
+     typeT (
+      typeName (
+       "core"
+       "."
+       "string"
+      )
+     )
+    )
+    eos    "}"
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "pipelineProps"
+     ","
+     "badProps"
+    )
+    ":="
+    expressionList (
+     expression (
+      primaryExpr (
+       functionCall (
+        typeName (
+         "core"
+         "."
+         "Pipeline"
+         "."
+         "Props"
+        )
+        arguments (
+         "("
+         expressionList (
+          expression (
+           primaryExpr (
+            operand (
+             operandName (
+              "PipelineProps"
+             )
+            )
+           )
+          )
+         )
+         ")"
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   functionCall (
+    typeName (
+     "git-subscibe"
+    )
+    arguments (
+     "("
+     ")"
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "gitChangeNotifications"
+     ","
+     "gitSubscribeErr"
+    )
+    ":="
+    expressionList (
+     expression (
+      primaryExpr (
+       functionCall (
+        typeName (
+         "git-subscibe"
+        )
+        arguments (
+         "("
+         expressionList (
+          expression (
+           primaryExpr (
+            operand (
+             literal (
+              basicLit (
+               messageValue (
+                messageValueMultiLine (
+                 "{"
+                 eos                 lineKeyedElement (
+                  keyedElement (
+                   keyedElementKV (
+                    key (
+                     "url"
+                    )
+                    ":"
+                    element (
+                     expression (
+                      primaryExpr (
+                       operand (
+                        operandName (
+                         "pipelineProps"
+                         "."
+                         "from"
+                        )
+                       )
+                      )
+                     )
+                    )
+                   )
+                  )
+                  ","
+                  eos                 )
+                 lineKeyedElement (
+                  keyedElement (
+                   keyedElementKV (
+                    key (
+                     "match"
+                    )
+                    ":"
+                    element (
+                     expression (
+                      primaryExpr (
+                       functionCall (
+                        typeName (
+                         "regexp"
+                        )
+                        arguments (
+                         "("
+                         expressionList (
+                          expression (
+                           primaryExpr (
+                            operand (
+                             literal (
+                              basicLit (
+                               string_ (
+                                "`.proto$`"
+                               )
+                              )
+                             )
+                            )
+                           )
+                          )
+                         )
+                         ")"
+                        )
+                       )
+                      )
+                     )
+                    )
+                   )
+                  )
+                  ","
+                  eos                 )
+                 "}"
+                )
+               )
+              )
+             )
+            )
+           )
+          )
+         )
+         ")"
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "gitChangeNotification"
+    )
+    ":="
+    pipe (
+     pipeUnit (
+      pipeUnitIdentifers (
+       eos       "|"
+       identifierList (
+        "gitChangeNotifications"
+       )
+      )
+     )
+     pipeUnit (
+      pipeUnitExpression (
+       eos       "|"
+       expression (
+        primaryExpr (
+         functionCall (
+          typeName (
+           "core"
+           "."
+           "stream"
+           "."
+           "each"
+          )
+          arguments (
+           "("
+           expressionList (
+            expression (
+             primaryExpr (
+              operand (
+               operandName (
+                "gitChangeNotifications"
+               )
+              )
+             )
+            )
+           )
+           ")"
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "protoDir"
+     ","
+     "pullErr"
+    )
+    ":="
+    pipe (
+     pipeUnit (
+      pipeUnitIdentifers (
+       eos       "|"
+       identifierList (
+        "gitChangeNotification"
+       )
+      )
+     )
+     pipeUnit (
+      pipeUnitExpression (
+       eos       "|"
+       expression (
+        primaryExpr (
+         functionCall (
+          typeName (
+           "git-pull"
+          )
+          arguments (
+           "("
+           expressionList (
+            expression (
+             primaryExpr (
+              operand (
+               literal (
+                basicLit (
+                 messageValue (
+                  messageValueMultiLine (
+                   "{"
+                   eos                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "url"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          operandName (
+                           "gitChangeNotification"
+                           "."
+                           "url"
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   "}"
+                  )
+                 )
+                )
+               )
+              )
+             )
+            )
+           )
+           ")"
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "outDir"
+    )
+    ":="
+    expressionList (
+     expression (
+      primaryExpr (
+       functionCall (
+        typeName (
+         "core"
+         "."
+         "fs"
+         "."
+         "tmp"
+        )
+        arguments (
+         "("
+         ")"
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "buildInfo"
+     ","
+     "buildErr"
+    )
+    ":="
+    pipe (
+     pipeUnit (
+      pipeUnitIdentifers (
+       eos       "|"
+       identifierList (
+        "protoDir"
+        ","
+        "outDir"
+       )
+      )
+     )
+     pipeUnit (
+      pipeUnitExpression (
+       eos       "|"
+       expression (
+        primaryExpr (
+         functionCall (
+          typeName (
+           "linux-tool"
+          )
+          arguments (
+           "("
+           expressionList (
+            expression (
+             primaryExpr (
+              operand (
+               literal (
+                basicLit (
+                 messageValue (
+                  messageValueMultiLine (
+                   "{"
+                   eos                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "image"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          literal (
+                           basicLit (
+                            string_ (
+                             ""arch""
+                            )
+                           )
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "install"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          literal (
+                           basicLit (
+                            sliceValue (
+                             sliceValueSingleLine (
+                              "["
+                              expression (
+                               primaryExpr (
+                                operand (
+                                 literal (
+                                  basicLit (
+                                   string_ (
+                                    ""protobuf""
+                                   )
+                                  )
+                                 )
+                                )
+                               )
+                              )
+                              "]"
+                             )
+                            )
+                           )
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "env"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          literal (
+                           basicLit (
+                            messageValue (
+                             messageValueMultiLine (
+                              "{"
+                              eos                              lineKeyedElement (
+                               keyedElement (
+                                keyedElementKV (
+                                 key (
+                                  "PROTO_DIR"
+                                 )
+                                 ":"
+                                 element (
+                                  expression (
+                                   primaryExpr (
+                                    functionCall (
+                                     typeName (
+                                      "core"
+                                      "."
+                                      "fs"
+                                      "."
+                                      "path"
+                                     )
+                                     arguments (
+                                      "("
+                                      expressionList (
+                                       expression (
+                                        primaryExpr (
+                                         operand (
+                                          operandName (
+                                           "protoDir"
+                                          )
+                                         )
+                                        )
+                                       )
+                                      )
+                                      ")"
+                                     )
+                                    )
+                                   )
+                                  )
+                                 )
+                                )
+                               )
+                               ","
+                               eos                              )
+                              lineKeyedElement (
+                               keyedElement (
+                                keyedElementKV (
+                                 key (
+                                  "OUT_DIR"
+                                 )
+                                 ":"
+                                 element (
+                                  expression (
+                                   primaryExpr (
+                                    functionCall (
+                                     typeName (
+                                      "core"
+                                      "."
+                                      "fs"
+                                      "."
+                                      "path"
+                                     )
+                                     arguments (
+                                      "("
+                                      expressionList (
+                                       expression (
+                                        primaryExpr (
+                                         operand (
+                                          operandName (
+                                           "outDir"
+                                          )
+                                         )
+                                        )
+                                       )
+                                      )
+                                      ")"
+                                     )
+                                    )
+                                   )
+                                  )
+                                 )
+                                )
+                               )
+                               ","
+                               eos                              )
+                              lineKeyedElement (
+                               keyedElement (
+                                keyedElementKV (
+                                 key (
+                                  "LANG"
+                                 )
+                                 ":"
+                                 element (
+                                  expression (
+                                   primaryExpr (
+                                    operand (
+                                     operandName (
+                                      "pipelineProps"
+                                      "."
+                                      "lang"
+                                     )
+                                    )
+                                   )
+                                  )
+                                 )
+                                )
+                               )
+                               ","
+                               eos                              )
+                              "}"
+                             )
+                            )
+                           )
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "workdir"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          operandName (
+                           "protoDir"
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "run"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          literal (
+                           basicLit (
+                            string_ (
+                             ""/bin/bash -c""
+                            )
+                           )
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   "}"
+                  )
+                 )
+                )
+               )
+              )
+             )
+            )
+           )
+           ")"
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "pushInfo"
+     ","
+     "pushErr"
+    )
+    ":="
+    pipe (
+     pipeUnit (
+      pipeUnitIdentifers (
+       eos       "|"
+       identifierList (
+        "buildInfo"
+        ","
+        "outDir"
+       )
+      )
+     )
+     pipeUnit (
+      pipeUnitExpression (
+       eos       "|"
+       expression (
+        primaryExpr (
+         functionCall (
+          typeName (
+           "git-push"
+          )
+          arguments (
+           "("
+           expressionList (
+            expression (
+             primaryExpr (
+              operand (
+               literal (
+                basicLit (
+                 messageValue (
+                  messageValueMultiLine (
+                   "{"
+                   eos                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "to"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          operandName (
+                           "pipelineProps"
+                           "."
+                           "to"
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "from"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          operandName (
+                           "outDir"
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementKV (
+                      key (
+                       "clean"
+                      )
+                      ":"
+                      element (
+                       expression (
+                        primaryExpr (
+                         operand (
+                          operandName (
+                           "true"
+                          )
+                         )
+                        )
+                       )
+                      )
+                     )
+                    )
+                    ","
+                    eos                   )
+                   "}"
+                  )
+                 )
+                )
+               )
+              )
+             )
+            )
+           )
+           ")"
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "compileInfo"
+    )
+    ":="
+    pipe (
+     pipeUnit (
+      pipeUnitIdentifers (
+       eos       "|"
+       identifierList (
+        "gitChangeNotification"
+        ","
+        "pushInfo"
+        ","
+        "buildInfo"
+       )
+      )
+     )
+     pipeUnit (
+      pipeUnitExpression (
+       eos       "|"
+       expression (
+        primaryExpr (
+         functionCall (
+          typeName (
+           "core"
+           "."
+           "message"
+          )
+          arguments (
+           "("
+           expressionList (
+            expression (
+             primaryExpr (
+              operand (
+               literal (
+                basicLit (
+                 messageValue (
+                  messageValueMultiLine (
+                   "{"
+                   eos                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementIdentifer (
+                      "gitChangeNotification"
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementIdentifer (
+                      "pushInfo"
+                     )
+                    )
+                    ","
+                    eos                   )
+                   lineKeyedElement (
+                    keyedElement (
+                     keyedElementIdentifer (
+                      "buildInfo"
+                     )
+                    )
+                    ","
+                    eos                   )
+                   "}"
+                  )
+                 )
+                )
+               )
+              )
+             )
+            )
+           )
+           ")"
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "compileError"
+    )
+    ":="
+    pipe (
+     pipeUnit (
+      pipeUnitIdentifers (
+       eos       "|"
+       identifierList (
+        "pullErr"
+        ","
+        "buildErr"
+        ","
+        "pushErr"
+       )
+      )
+     )
+     pipeUnit (
+      pipeUnitExpression (
+       eos       "|"
+       expression (
+        primaryExpr (
+         functionCall (
+          typeName (
+           "core"
+           "."
+           "error"
+           "."
+           "join"
+          )
+          arguments (
+           "("
+           expressionList (
+            expression (
+             primaryExpr (
+              operand (
+               operandName (
+                "pullErr"
+               )
+              )
+             )
+            )
+            ","
+            expression (
+             primaryExpr (
+              operand (
+               operandName (
+                "buildErr"
+               )
+              )
+             )
+            )
+            ","
+            expression (
+             primaryExpr (
+              operand (
+               operandName (
+                "pushErr"
+               )
+              )
+             )
+            )
+           )
+           ")"
+          )
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   shortVarDecl (
+    identifierList (
+     "compileStream"
+    )
+    ":="
+    expressionList (
+     expression (
+      primaryExpr (
+       functionCall (
+        typeName (
+         "core"
+         "."
+         "stream"
+         "."
+         "from"
+        )
+        arguments (
+         "("
+         expressionList (
+          expression (
+           primaryExpr (
+            operand (
+             operandName (
+              "compileInfo"
+             )
+            )
+           )
+          )
+          ","
+          expression (
+           primaryExpr (
+            operand (
+             operandName (
+              "compileError"
+             )
+            )
+           )
+          )
+         )
+         ")"
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+  eos  statement (
+   functionCall (
+    typeName (
+     "core"
+     "."
+     "Pipeline"
+     "."
+     "Return"
+    )
+    arguments (
+     "("
+     expressionList (
+      expression (
+       primaryExpr (
+        operand (
+         operandName (
+          "compileStream"
+         )
+        )
+       )
+      )
+      ","
+      expression (
+       primaryExpr (
+        functionCall (
+         typeName (
+          "core"
+          "."
+          "error"
+          "."
+          "join"
+         )
+         arguments (
+          "("
+          expressionList (
+           expression (
+            primaryExpr (
+             operand (
+              operandName (
+               "badProps"
+              )
+             )
+            )
+           )
+           ","
+           expression (
+            primaryExpr (
+             operand (
+              operandName (
+               "gitSubscribeErr"
+              )
+             )
+            )
+           )
+          )
+          ")"
+         )
+        )
+       )
+      )
+     )
+     ")"
+    )
+   )
+  )
+  eos )
+)
